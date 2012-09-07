@@ -10,6 +10,7 @@ class DeferredPolymorphBaseModel(models.Model):
     
     objects = DeferredPolymorphManager()
     base_objects = models.Manager()
+    _base_manager = base_objects
     
     def _fill_poly_ct(self):
         if self._poly_ct_id is None:
