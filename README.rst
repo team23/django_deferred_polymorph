@@ -10,3 +10,11 @@ django_deferred_polymorph includes two abstract base models:
  * DeferredPolymorphBaseModel as the base for every deferred model
  * SubDeferredPolymorphBaseModel which extends DeferredPolymorphBaseModel to force userd to use a subclass
 
+Installation
+============
+
+First::
+
+    pip install django_deferred_polymorph
+
+Then add ``'django_deferred_polymorph'`` to your ``INSTALLED_APPS`` settings.
