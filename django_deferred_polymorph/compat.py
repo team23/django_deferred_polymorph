@@ -27,3 +27,19 @@ else:
                 f.attname not in m2m_field_names and
                 not f.primary_key)
         ]
+
+
+# We use the appconfig ready method to setup the relation fix. If that is not
+# available we need to use the class_prepared signal.
+if django.VERSION < (1, 7):
+    def fix_parent_and_child_relation_signal_handler(sender, **kwargs):
+        from .patch_relations import fix_parent_and_child_relation
+        fix_parent_and_child_relation(sender)
+
+    def setup_fix_parent_and_child_relation():
+        from django.db.models.signals import class_prepared
+
+        class_prepared.connect(fix_parent_and_child_relation_signal_handler)
+else:
+    def setup_fix_parent_and_child_relation():
+        pass
