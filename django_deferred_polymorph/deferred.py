@@ -2,6 +2,7 @@
 # the main change is, that all fields are loaded at once, so this
 # doesn't issue tons of database queries
 from django.db.models.query_utils import DeferredAttribute
+from .compat import get_local_field_names
 
 
 class DeferredManager(object):
@@ -123,11 +124,9 @@ deferred_class_factory.__safe_for_unpickling__ = True
 # TODO: Cache deferred models!
 def deferred_child_class_factory(instance, child_model):
     base_model = instance.__class__
-    base_m2m_fields = [f.attname for f in base_model._meta._many_to_many()]
-    base_fields = [f.attname for f in base_model._meta.fields if f.attname not in base_m2m_fields and not f.primary_key]
-    child_m2m_fields = [f.attname for f in child_model._meta._many_to_many()]
-    child_fields = [f.attname for f in child_model._meta.fields if f.attname not in child_m2m_fields and not f.primary_key]
-    deferred_attrs = [f for f in child_fields if not f in base_fields]
+    base_fields = get_local_field_names(base_model)
+    child_fields = get_local_field_names(child_model)
+    deferred_attrs = [f for f in child_fields if f not in base_fields]
     if not deferred_attrs:
         return child_model
     return deferred_class_factory(child_model, deferred_attrs)
