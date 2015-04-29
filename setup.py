@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "django_deferred_polymorph",
-    version = "0.1.0-2",
+    version = "0.2.0",
     description = 'Polymorphic models based on django deferred models',
     author = 'David Danier',
     author_email = 'david.danier@team23.de',
