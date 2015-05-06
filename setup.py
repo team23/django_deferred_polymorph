@@ -12,7 +12,7 @@ setup(
         'django_deferred_polymorph',
     ],
     install_requires = [
-        'Django >=1.4',
+        'Django >= 1.6',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
