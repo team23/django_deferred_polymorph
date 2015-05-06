@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.1
+0.3.0
 -----
 
 * Dropping support for Django 1.5.x and lower as we had to adept to Django's
