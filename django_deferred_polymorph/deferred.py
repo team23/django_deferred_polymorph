@@ -107,6 +107,8 @@ def deferred_class_factory(model, attrs):
     # NAME CHANGED TO AVOID NAME COLLISION WITH DJANGO DEFERRED MODELS
     # ("a" added)
     name = "%s_aDeferred_%s" % (model.__name__, '_'.join(sorted(list(attrs))))
+    # type() requires a non-unicode string.
+    name = str(name)
 
     overrides = dict([(attr, LoadAllDeferredAttribute(attr, model))
             for attr in attrs])
