@@ -1,4 +1,11 @@
+import codecs
+from os import path
 from setuptools import setup
+
+
+def read(*parts):
+    return codecs.open(path.join(path.dirname(__file__), *parts),
+                       encoding='utf-8').read()
 
 
 setup(
@@ -8,7 +15,9 @@ setup(
     author = 'David Danier',
     author_email = 'david.danier@team23.de',
     url = 'https://github.com/ddanier/django_deferred_polymorph',
-    long_description=open('README.rst', 'r').read(),
+    long_description = '\n\n'.join((
+        read('README.rst'),
+        read('CHANGES.rst'))),
     packages = [
         'django_deferred_polymorph',
     ],
