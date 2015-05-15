@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.3.1
+-----
+
+* Adding MANIFEST.in file to define which files get included in the source
+  distribution. CHANGES.rst was missing from that and caused an error on
+  install.
+
 0.3.0
 -----
 
