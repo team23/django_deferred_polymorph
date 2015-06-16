@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import django
 from django.db.models.signals import class_prepared
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
@@ -21,7 +20,6 @@ class DeferredPolymorphBaseModel(models.Model):
         if self._poly_ct_id is None:
             self._poly_ct = ContentType.objects.get_for_model(self.__class__)
 
-
     def save(self, *args, **kwargs):
         self._fill_poly_ct()
         return super(DeferredPolymorphBaseModel, self).save(*args, **kwargs)
@@ -34,7 +32,7 @@ class DeferredPolymorphBaseModel(models.Model):
         model = self.get_real_instance_class()
         if self.__class__ is model: # or (self._deferred and self.__class__.__bases__[0] is model):
             return self
-        return model._default_manager.get(pk = self.pk)
+        return model._default_manager.get(pk=self.pk)
 
     def delete(self, *args, **kwargs):
         if self._deferred:
