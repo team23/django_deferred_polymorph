@@ -12,6 +12,7 @@ USE_I18N = True
 USE_L10N = True
 
 INSTALLED_APPS = [
+    'django.contrib.contenttypes',
     'django_deferred_polymorph',
     'tests',
 ]
