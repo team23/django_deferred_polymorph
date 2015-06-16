@@ -18,3 +18,24 @@ First::
     pip install django_deferred_polymorph
 
 Then add ``'django_deferred_polymorph'`` to your ``INSTALLED_APPS`` settings.
+
+Running tests
+=============
+
+First create a `virtualenv`_, then install package inside the virtualenv and
+add the test dependencies with::
+
+    python setup.py develop
+    pip install -r requirements.txt
+
+Now you can run the test suite against the currently installed version of
+Django with::
+
+    python runtests.py
+
+However we support multiple versions of Django and Python. To test all
+relevant combinations at once you can use the following command::
+
+    tox
+
+.. _virtualenv: https://virtualenv.pypa.io/en/latest/
