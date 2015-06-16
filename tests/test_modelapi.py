@@ -1,7 +1,9 @@
 from django.test import TestCase
 
+from .models import ChildOfSelfReferencingModel
 from .models import SimpleBaseModel
 from .models import SimpleDeferredModel
+from .models import SelfReferencingBaseModel
 
 
 class ModelAPITest(TestCase):
@@ -25,3 +27,16 @@ class ModelAPITest(TestCase):
 
         self.assertEqual(SimpleBaseModel.objects.count(), 0)
         self.assertEqual(SimpleDeferredModel.objects.count(), 0)
+
+    def test_delete_self_referencing_base_model(self):
+        obj = ChildOfSelfReferencingModel.objects.create()
+        obj.self_fk = obj
+        obj.save()
+
+        self.assertEqual(SelfReferencingBaseModel.objects.count(), 1)
+        self.assertEqual(ChildOfSelfReferencingModel.objects.count(), 1)
+
+        obj.delete()
+
+        self.assertEqual(SelfReferencingBaseModel.objects.count(), 0)
+        self.assertEqual(ChildOfSelfReferencingModel.objects.count(), 0)

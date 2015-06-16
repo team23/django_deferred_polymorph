@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.3.2
+-----
+
+* Fix for Django 1.8 that did not set ``_base_manager`` correctly for
+  subclasses of ``DeferredPolymorphBaseModel``. That broke the
+  ``Model.delete()`` method in some cases.
+
 0.3.1
 -----
 

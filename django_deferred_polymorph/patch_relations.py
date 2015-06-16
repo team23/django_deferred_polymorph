@@ -11,7 +11,7 @@ def fix_parent_and_child_relation(model):
 
     if not issubclass(model, DeferredPolymorphBaseModel):
         return
-    for parent, field in model._meta.parents.iteritems():
+    for parent, field in model._meta.parents.items():
         if field is None:
             # not sure, what this means
             # seems to happen for deferred classes (and subclasses?)
