@@ -1,16 +1,26 @@
 language: python
 python: 2.7
 env:
-  - TOXENV=py27-16
-  - TOXENV=py27-17
-  - TOXENV=py27-18
-  - TOXENV=py34-16
-  - TOXENV=py34-17
-  - TOXENV=py34-18
-  - TOXENV=pypy-16
-  - TOXENV=pypy-17
-  - TOXENV=pypy-18
+- TOXENV=py27-16
+- TOXENV=py27-17
+- TOXENV=py27-18
+- TOXENV=py34-16
+- TOXENV=py34-17
+- TOXENV=py34-18
+- TOXENV=pypy-16
+- TOXENV=pypy-17
+- TOXENV=pypy-18
 install:
-  - pip install tox
+- pip install tox
 script:
-  - tox
+- tox
+deploy:
+  provider: pypi
+  user: ddanier
+  password:
+    secure: d6+kSswdCMUFyh/1hrQ2gDpGlGEHgq2/QXPR7Ade1C3a8nYl2Sjt6nDqq5PkUYRMuZwhBNKwPYfyPHUSZe0rgBC2fAdd+PznFrcv3jaTTR3l1MgmChCh4+uq//LtC7XhBsKXtUT1+FgmlE3S8s+CZeSS9VSSyc0TqJzSFrou2K4Iet3qyh3nMVfwVTVEn3mGo2ExNDcuZEwpftYwMTKPW41oSt6CGWtT+bi3RRwhR7byEUIx2QEvC7dLg3JUSGBomANDZjLGDUadepxkFdoG0Q5wvK64D5bL0ayqJk31uZBwqkVPiDeSiAByaA++f75HAWKwHaibUi+ca+WS4ZcmVCUXajKT5ovtlx+gjWgml0RHqm1OQkgp5XIPnSXaIzX32A+uZnpeMmzqPr0xp8jbDtEBu/A8hUfuSo14jjld9cf7kxHx1RlV6Qzt70aS3A4A16nvNmLD4t/nx94tHO0kdoPx4NyRzNCsbNzZeUNNQ+AsGkWgr/MAFOc8qZj326gyJV9FZGEfCxgW3QhGREp7vMgJhsmA1rblNsK7dNJEFQCm1byPuor5F9WDqUjqpkrYM0DYG7D575799U/lLjuiniJ/ZzeXEVz5/5CZT1/74/JOhflCdWdudGzWhTkA6XDQd/UFLI/onlsDfmGOJQ3Enfp07tqrb3V3q7y9SEkKFls=
+  on:
+    tags: true
+    repo: team23/django_deferred_polymorph
+    condition: "$TOXENV = py27-18"
+
