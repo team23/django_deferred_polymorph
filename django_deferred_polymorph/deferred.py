@@ -95,11 +95,6 @@ def deferred_class_factory(model, attrs):
     being replaced with DeferredAttribute objects. The "pk_value" ties the
     deferred attributes to a particular instance of the model.
     """
-    class Meta:
-        pass
-    setattr(Meta, "proxy", True)
-    setattr(Meta, "app_label", model._meta.app_label)
-
     # The app_cache wants a unique name for each model, otherwise the new class
     # won't be created (we get an old one back). Therefore, we generate the
     # name using the passed in attrs. It's OK to reuse an old case if the attrs
@@ -110,13 +105,21 @@ def deferred_class_factory(model, attrs):
     # type() requires a non-unicode string.
     name = str(name)
 
-    overrides = dict([(attr, LoadAllDeferredAttribute(attr, model))
-            for attr in attrs])
-    overrides["Meta"] = Meta
-    overrides["__module__"] = model.__module__
-    overrides["_deferred"] = True
-    overrides["_deferred_manager"] = DeferredManagerAccess(model, attrs)
-    return type(name, (model,), overrides)
+    try:
+        return model._meta.apps.get_model(model._meta.app_label, name)
+    except LookupError:
+        class Meta:
+            pass
+        setattr(Meta, "proxy", True)
+        setattr(Meta, "app_label", model._meta.app_label)
+
+        overrides = dict([(attr, LoadAllDeferredAttribute(attr, model))
+                          for attr in attrs])
+        overrides["Meta"] = Meta
+        overrides["__module__"] = model.__module__
+        overrides["_deferred"] = True
+        overrides["_deferred_manager"] = DeferredManagerAccess(model, attrs)
+        return type(name, (model,), overrides)
 
 # The above function is also used to unpickle model instances with deferred
 # fields.
