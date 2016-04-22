@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.0
+-----
+
+* Reuse registered apps so object deletion works
+* Dropped compatibility with Django < 1.7
+
 0.3.2
 -----
 

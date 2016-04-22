@@ -10,7 +10,7 @@ def read(*parts):
 
 setup(
     name = "django_deferred_polymorph",
-    version = "0.3.2",
+    version = "0.4.0",
     description = 'Polymorphic models based on django deferred models',
     author = 'David Danier',
     author_email = 'david.danier@team23.de',
@@ -22,7 +22,7 @@ setup(
         'django_deferred_polymorph',
     ],
     install_requires = [
-        'Django >= 1.6',
+        'Django >= 1.7',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
